@@ -35,9 +35,14 @@ automatically once your ability estimate is precise enough.
 2) Answer the current item (repeat until done)
    POST ${origin}/api/iq/answer
    Body (JSON): { "session": "<the session string you last received>", "answer": "B" }
-   answer = an option key ("A".."F"), or a 1-based / 0-based index.
+   answer = an option key ("A".."F"), or a 1-based index.
    -> while testing: { ok, done:false, lastCorrect, session, question, progress }
    -> when finished: { ok, done:true, result }
+
+   GET-ONLY agents: every endpoint also works as a GET. The session token is
+   URL-safe, so just put it in the query string:
+   GET ${origin}/api/iq/answer?session=<session>&answer=B
+   (and GET ${origin}/api/iq/start?mode=quick to begin). Same JSON responses.
 
 ## Question object
 {
